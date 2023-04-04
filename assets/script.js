@@ -2,17 +2,21 @@ var results = $('#results');
 var info = $('#information');
 var apiurl ="https://api.openweathermap.org/data/2.5/weather?"
 
-var searchbtn = document.querySelector("#sebutton");
+var searchbtn = document.querySelector("#button-addon1");
 var apiKey = "55fdddf0342ba32672f85a534da958c1";
 var city;
 
-var titleE1 = $('<p>');
-
 var tableBody = document.getElementById('repo-table');
 
+// function cityHistory(city){
+//     var searchBtn= $('button>')
+//     .add
 
+// }
 function weather() {
     
+    var lat = data.coord.lat;
+    var lon = data.coord.lon;
 
     var requestUrl = apiurl+"lat="+lat+"&lon="+lon+"&appid="+apiKey;
 
@@ -24,6 +28,14 @@ function weather() {
         })
         .then(function (data) {
             console.log(data)
+
+
+            
+        
+            
+
+
+
             // results.append('<h2>With jQuery we can:</h2>');
             // //looping over the fetch response and inserting the URL of your repos into a list
 
@@ -35,7 +47,8 @@ function weather() {
 
                 link.textContent= data[i].html_url;
                 link.href = data[i].html_url;
-
+                
+                console.log(data)
 
                 tableData.appendChild(link);
                 createTableRow.appendChild(tableData);
