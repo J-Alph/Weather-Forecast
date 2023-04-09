@@ -26,9 +26,9 @@ body{
 
 .container{
 
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(243, 242, 232);
     border: 2rem;
-    width: 60%;
+    width: 50%;
     height: 300px;
     padding: 30px;
     border-color: black;
@@ -36,6 +36,17 @@ body{
    
     display:inline-block;
    
+}
+.container2{
+
+    background-color: rgb(98, 91, 23);
+    border: 2rem;
+    width: 50%;
+    height: 300px;
+    padding: 30px;
+    border-color: rgb(149, 31, 31);
+    margin: 20px;
+
 }
 
 .searchbox{
