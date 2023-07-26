@@ -15,7 +15,7 @@ function weather(city) {
   localStorage.setItem("city", city);
   console.log(city);
 
-  var requestUrl = `https://api.openweathermap.org/data/2.5/weather?q=+${city}+&appid=${apiKey}`;
+  let requestUrl = `https://api.openweathermap.org/data/2.5/weather?q=+${city}+&appid=${apiKey}`;
 
   if (!city) {
     console.log("nothing");
@@ -61,26 +61,23 @@ searchbtn.addEventListener("click", function() {
 
  function getInfo(){
   const newName = document.getElementById("city-search").value;
-  const cityname = document.getElementById("cityname");
+  const cityname = document.getElementById("forecast");
   cityname.innerHTML = newName;
- }
- fetch(apiurl + city + apiKey)
+
+  var city = $('input[id="city-search"]').val();
+
+
+  let forecasttUrl = `https://api.openweathermap.org/data/2.5/forecast?q=+${city}+&appid=${apiKey}`;
+
+
+ fetch(forecasttUrl)
  .then(response => (response.json())
  .then(data => {  
-    for (i=0; i<5; i++){
-      document.getElementById("day"+(i+1)+"Min").innerHTML = "min:" +Number(data.list.main.temp_min - 301.56).toFixed(2) + "°C";
-     }
-     for (i=0; i<5; i++){
-     document.getElementById("day"+(i+1)+"Max").innerHTML = "mmax" +Number(data.list.main.temp_min - 301.56).toFixed(2) + "°C";
-  }
-      for (i=0; i<5; i++){
-        document.getElementById("day"+(i+1)+"Min").innerHTML = "min:" +Number(data.list.main.temp_min - 301.56).toFixed(2) + "°C";
 
-}
-  for (i=0; i<5; i++){
-        document.getElementById("img" +(i+1)).src = "http://openweathermap.org/img/w/" + data.list[i].weather[0].icon + ".png";
+  console.log(data);
 
+ 
+
+ 
+ } ))
 }
-}
-)
-)
