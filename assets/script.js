@@ -1,103 +1,86 @@
 const searchbtn = document.querySelector("#button-addon1");
+const issueContainer = document.getElementById('issues');
 
-const results = $('#results');
-const info23 = $('#information');
-const apiurl ="api.openweathermap.org/data/2.5/weather?q="
-const locationUrl ="https://api.openweathermap.org/data/2.5/weather?lat="
+const results = $("#results");
+const info23 = $("#information");
+const apiurl = "api.openweathermap.org/data/2.5/weather?q=";
+const locationUrl = "https://api.openweathermap.org/data/2.5/weather?lat=";
 
 
-const cityApiUrl = ""
 const apiKey = "55fdddf0342ba32672f85a534da958c1";
-const cityinfo =[];
 
 
 function weather(city) {
-    var city = $('input[id="city-search"]').val();
+  var city = $('input[id="city-search"]').val();
+  localStorage.setItem("city", city);
+  console.log(city);
 
-        console.log(city);
+  var requestUrl = `https://api.openweathermap.org/data/2.5/weather?q=+${city}+&appid=${apiKey}`;
 
-    if(!city){
+  if (!city) {
     console.log("nothing");
     return;
-    }
-   
-
-
-    var requestUrl = `https://api.openweathermap.org/data/2.5/weather?q=+${city}+&appid=${apiKey}`
-
-    var 
-
-  $.ajax({
-  url: requestUrl,
-  method: 'GET',
-}).then(function (response) {
-  console.log('AJAX Response \n-------------');
-  console.log(response);
-})
-    
-    .then (data =>{
-      console.log(response);
-
-    for (var i = 0; i < data.length; i++) {
-        console.log(data);
-    
-
-    }
-    }
-    )
-;
+  }
 
 
 
+  fetch(requestUrl)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data);
+      var weatherData = document.getElementById("weather-data");
+
+      console.log(data);
+
+      weatherData.innerHTML = `<a href="https://openweathermap.org/city/${data.id}" target="_blank">
+        <h2>${data.name}</h2>
+        <p>Temperature: ${data.main.temp}</p>
+        <p>Humidity: ${data.main.humidity}</p>
+        <p>Wind Speed: ${data.wind.speed}</p></a>
+      `
+ } )  };
+  
+  function addEntry() {
+    var entry = localStorage.getItem("city");
+    var button = document.createElement("button");
+    button.innerHTML = entry;
+    document.getElementById("search-history").appendChild(button);
+  }
+
+  var weatherStorage = document.getElementById("wStorage")
+  const values = Object.values(localStorage);
 
 
 
+searchbtn.addEventListener("click", function() {
 
+ weather(); addEntry(); getInfo()});
+ 
 
+ function getInfo(){
+  const newName = document.getElementById("city-search").value;
+  const cityname = document.getElementById("cityname");
+  cityname.innerHTML = newName;
+ }
+ fetch(apiurl + city + apiKey)
+ .then(response => (response.json())
+ .then(data => {  
+    for (i=0; i<5; i++){
+      document.getElementById("day"+(i+1)+"Min").innerHTML = "min:" +Number(data.list.main.temp_min - 301.56).toFixed(2) + "°C";
+     }
+     for (i=0; i<5; i++){
+     document.getElementById("day"+(i+1)+"Max").innerHTML = "mmax" +Number(data.list.main.temp_min - 301.56).toFixed(2) + "°C";
+  }
+      for (i=0; i<5; i++){
+        document.getElementById("day"+(i+1)+"Min").innerHTML = "min:" +Number(data.list.main.temp_min - 301.56).toFixed(2) + "°C";
 
+}
+  for (i=0; i<5; i++){
+        document.getElementById("img" +(i+1)).src = "http://openweathermap.org/img/w/" + data.list[i].weather[0].icon + ".png";
 
-
-
-
-
-
-
-
-
-
-
-    // fetch(requestUrl)
-    //     .then(function (response) {
-    //     return response.json();
-     
-    //         })
-    //     .then(function (data) {
-            
-    //         results.append(data)
-    //         results.append(data.coord.lat)
-    //         console.log(data)
-    //         results.append(data.coord)
-
-      
-            //     var lat = data.coord.lat;
-            //     var lon = data.coord.lon;
-
-
-            // var locationUrl = "https://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+lon+"&appid="+apiKey  
-
-   
-        //     fetch(locationUrl)
-        //         .then(function(response){
-
-        //             return response.json();
-        //         })
-                
-        //         .then
-        //          for (var i = 0; i < data.length; i++) {
-
-        //     }  
-        }
-        // );
-    // }
-
-searchbtn.addEventListener('click', weather);
+}
+}
+)
+)
